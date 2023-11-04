@@ -5,9 +5,11 @@ import java.util.List;
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +37,14 @@ public class CategoryController {
 	@PostMapping("/name")
 	public List<Category> findByName(@RequestBody Category category){
 		return categoryService.findByName(category);
+	}
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Object> deleteById(@PathVariable int id){
+		return categoryService.deleteById(id);
+	}
+	@PutMapping("/update/{id}")
+	public ResponseEntity<Object> updateById(@PathVariable int id,@RequestBody Category category){
+		return categoryService.updateById(id,category);
 	}
 	
 	
