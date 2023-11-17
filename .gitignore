@@ -32,5 +32,5 @@ build/
 ### VS Code ###
 .vscode/
 .gitignore
-.templates/test4.html
+/templates/test5.html
 
