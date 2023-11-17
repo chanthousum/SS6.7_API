@@ -1,10 +1,12 @@
 package com.setec.services;
 
+import java.io.ObjectInputFilter.Status;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +29,6 @@ public class CategoryService {
 		Category category1=new Category();
 		category1.setName(category.getName());
 		category1.setCreateBy(category.getCreateBy());
-		
-		Category category2=categoryRepository.findByName(category1.getName());
-		if(category2!=null) {
-			throw new StudentNotfFoundException("Category Name has been already!");
-		}
-		
 		categoryRepository.save(category1);
 		return new ResponseEntity<Object>("Category created",HttpStatus.CREATED);
 	}
@@ -56,25 +52,24 @@ public class CategoryService {
 		return categoryList;
 	}
 
-	public ResponseEntity<Object> deleteById(int id) {
-		Category category=categoryRepository.findCategoryById(id);
-		if(category==null) {
-			throw new StudentNotfFoundException("Not found Id:"+id);
+	public ResponseEntity<Object> updateById(int id, Category category) {
+		Category category1=categoryRepository.findCategoryById(id);
+		if(category1==null) {
+			throw new StudentNotfFoundException("Not found id:"+id);
 		}
-		categoryRepository.delete(category);
-		return new ResponseEntity<Object>("Categeory Deleted",HttpStatus.OK);
+		category1.setName(category.getName());
+		category1.setUpdateBy(category.getUpdateBy());
+		categoryRepository.save(category1);
+		return new ResponseEntity<Object>("Category updated",HttpStatus.OK);
 	}
 
-	public ResponseEntity<Object> updateById(int id, Category category) {
-		// TODO Auto-generated method stub
-		Category category2=categoryRepository.findCategoryById(id);
-		if(category2==null) {
-			throw new StudentNotfFoundException("Not found Id:"+id);
+	public ResponseEntity<Object> deleteById(int id) {
+		Category category1=categoryRepository.findCategoryById(id);
+		if(category1==null) {
+			throw new StudentNotfFoundException("Not found id:"+id);
 		}
-		category2.setName(category.getName());
-		category2.setUpdateBy(category.getUpdateBy());
-		categoryRepository.save(category2);
-		return new ResponseEntity<Object>("Category Updated",HttpStatus.OK);
+		categoryRepository.deleteById(category1.getId());
+		return new ResponseEntity<Object>("Category deleted",HttpStatus.OK);
 	}
  
 }

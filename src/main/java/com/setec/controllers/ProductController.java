@@ -17,39 +17,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.setec.models.Category;
+import com.setec.models.Product;
 import com.setec.services.CategoryService;
+import com.setec.services.ProductService;
 
 @RestController
-//@CrossOrigin(origins ="*")
-@CrossOrigin(origins = "*")
-@RequestMapping("/api/v1/category")
-public class CategoryController {
+@CrossOrigin(origins = {"http://localhost:8091", "http://10.0.2.2:8080"})
+@RequestMapping("/api/v1/product")
+public class ProductController {
 	@Autowired
-	CategoryService categoryService;
+	ProductService productService;
 	@GetMapping("")
-	
-	public List<Category> getCategoryAll(){
-		return categoryService.getCategoryAll();
+	public List<Product> getProductyAll(){
+		return productService.getProductAll();
 	}
 	@PostMapping("/save")
-	public ResponseEntity<Object> save(@RequestBody Category category){
-		return categoryService.save(category);
+	public ResponseEntity<Object> save(@RequestBody Product product){
+		return productService.save(product);
 	}
 	@GetMapping("/{id}")
-	public Category findById(@PathVariable int id) {
-		return categoryService.findById(id);
+	public Product findById(@PathVariable int id) {
+		return productService.findById(id);
 	}
 	@PostMapping("/name")
-	public List<Category> findByName(@RequestBody Category category){
-		return categoryService.findByName(category);
+	public List<Product> findByName(@RequestBody Product product){
+		return productService.findByName(product);
 	}
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Object> updateById(@PathVariable int id,@RequestBody Category category){
-		return categoryService.updateById(id,category);
+	public ResponseEntity<Object> updateById(@PathVariable int id,@RequestBody Product product){
+		return productService.updateById(id,product);
 	}
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Object> deleteById(@PathVariable int id){
-		return categoryService.deleteById(id);
+		return productService.deleteById(id);
 	}
 	
 	

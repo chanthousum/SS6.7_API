@@ -12,28 +12,27 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Category")
-public class Category {
+@Table(name = "Purchase")
+public class Purchase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Column(name ="name",unique =false,nullable =false)
-	private String name;
 	private int createBy;
-	@Column(name ="updateBy",nullable = false)
-	private int updateBy;
 	@CreationTimestamp()
-	private Date createAt;
-	@UpdateTimestamp()
-	private Date updateAt;
-	@OneToMany(cascade =CascadeType.ALL,mappedBy ="category")
-	private List<Product> products;
-	public Category() {
+	private Date purchaseDate;
+	@OneToOne()
+	@JoinColumn(name ="product_id",referencedColumnName ="id")
+	private Product product;
+	private int qty;
+	private double cost;
+	private double total;
+	public Purchase() {
 		// TODO Auto-generated constructor stub
 	}
 	public int getId() {
@@ -42,35 +41,41 @@ public class Category {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public int getCreateBy() {
 		return createBy;
 	}
 	public void setCreateBy(int createBy) {
 		this.createBy = createBy;
 	}
-	public int getUpdateBy() {
-		return updateBy;
+	public Date getPurchaseDate() {
+		return purchaseDate;
 	}
-	public void setUpdateBy(int updateBy) {
-		this.updateBy = updateBy;
+	public void setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate = purchaseDate;
 	}
-	public Date getCreateAt() {
-		return createAt;
+	public Product getProduct() {
+		return product;
 	}
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
-	public Date getUpdateAt() {
-		return updateAt;
+	public int getQty() {
+		return qty;
 	}
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+	public double getCost() {
+		return cost;
+	}
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
 	}
 	
 	
