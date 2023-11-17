@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/SS6_7_API/src/main/resources/templates/test.html
