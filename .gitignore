@@ -31,4 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
-/SS6_7_API/src/main/resources/templates/test.html
+/SS6_7_API/.gitignore
+/SS6_7_API/src/main/resources/templates/test1.html
+/SS6
